@@ -1,0 +1,100 @@
+<section class="text-center" style="background-image: url('https://images.unsplash.com/photo-1576267423429-569309b31e84?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80');
+	background-repeat: no-repeat; background-size: cover; height: 65vh; width: 100%; max-width: 100%;
+	background-attachment: fixed; background-size: 100% 90%;">
+	<div class="row py-lg-5 text-center">
+		<div class="col-lg-6 col-md-8 mx-auto">
+			<h1 class="fw-light" style=" margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); color: white;">Welcome {{username}}</h1>
+			<p class="lead " style=" margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); color:  white;">We care for your stuff</p>
+			<p style=" margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); color: white;">
+				<a href="/auctions/new" class="btn btn-info  my-2">Create an Auction</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+<div class="container mt-4">
+	<div class="row  mt-3">
+		<div class="col">
+			<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+				aria-expanded="false">
+				Browse Categories
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+				<li><a class="dropdown-item" href="/auctions">All</a></li>
+				<li><a class="dropdown-item" href="/auctions/car">Cars</a></li>
+				<li><a class="dropdown-item" href="/auctions/electronic">Electronics and Computer</a></li>
+				<li><a class="dropdown-item" href="/auctions/fashion">Fashion, Health and Beauty</a></li>
+				<li><a class="dropdown-item" href="/auctions/hobbies">Hobbies, Toys, Outdoors</a></li>
+				<li><a class="dropdown-item" href="/auctions/home">Home, Garden and Tools</a></li>
+				<li><a class="dropdown-item" href="/auctions/kitchen">Kitchen and Dining</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<form class="d-flex" action="/search" method="GET" novalidate>
+				<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" name="search">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+		{{#each auctions as |auction|}}
+		<div class="album py-5">
+			<div class="col">
+				<div class="card shadow-sm">
+					<a href="/auctions/{{_id}}">
+						<img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+							aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
+							alt="" src="{{image}}">
+					</a>
+					<div class="card-body">
+						<a href="/auctions/{{_id}}" style="color:#505050 ; text-decoration:none">
+							<p class="card-title text-center">{{title}} </p>
+						</a>
+						<div>
+
+							{{#if (eq auction.highestBid 0)}}	
+
+							<p class="text-center"><span class="highestBidValue"
+									style="color:#42b449;">Base price: ${{price}}</span>
+							</p>
+
+							{{else}}
+
+							<p class="text-center"><span class="highestBidValue"
+							style="color:#42b449;">Highest Bid: ${{highestBid}}</span>
+							</p>
+
+							{{/if}}
+
+							<p class="text-center"> <span class="highestBidderName"
+									id="highestBidderName">{{highestBidderName}}</span> </p>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		{{/each}}
+	</div>
+</div>
